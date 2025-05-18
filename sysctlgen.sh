@@ -732,8 +732,16 @@ generate_sysctl_conf() {
             extra_settings["net.core.rmem_default"]=4194304
             extra_settings["net.core.wmem_default"]=4194304
             extra_settings["net.core.optmem_max"]=8388608
-            extra_settings["net.ipv4.tcp_rmem"]=$(( NIC >= 10000 ? "8192 262144 67108864" : "4096 131072 33554432" ))
-            extra_settings["net.ipv4.tcp_wmem"]=$(( NIC >= 10000 ? "8192 262144 67108864" : "4096 131072 33554432" ))
+            
+            # Fix TCP rmem and wmem settings using if/then/else
+            if [ "$NIC" -ge 10000 ]; then
+                extra_settings["net.ipv4.tcp_rmem"]="8192 262144 67108864"
+                extra_settings["net.ipv4.tcp_wmem"]="8192 262144 67108864"
+            else
+                extra_settings["net.ipv4.tcp_rmem"]="4096 131072 33554432"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 131072 33554432"
+            fi
+            
             extra_settings["net.ipv4.udp_mem"]="8388608 16777216 33554432"
             extra_settings["net.ipv4.tcp_mem"]="1048576 4194304 33554432"
             
@@ -842,8 +850,16 @@ generate_sysctl_conf() {
             extra_settings["net.core.rmem_default"]=2097152
             extra_settings["net.core.wmem_default"]=2097152
             extra_settings["net.core.optmem_max"]=4194304
-            extra_settings["net.ipv4.tcp_rmem"]=$(( NIC >= 10000 ? "4096 131072 33554432" : "4096 65536 16777216" ))
-            extra_settings["net.ipv4.tcp_wmem"]=$(( NIC >= 10000 ? "4096 131072 33554432" : "4096 65536 16777216" ))
+            
+            # Fix TCP rmem and wmem settings using if/then/else
+            if [ "$NIC" -ge 10000 ]; then
+                extra_settings["net.ipv4.tcp_rmem"]="4096 131072 33554432"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 131072 33554432"
+            else
+                extra_settings["net.ipv4.tcp_rmem"]="4096 65536 16777216"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 65536 16777216"
+            fi
+            
             extra_settings["net.ipv4.udp_mem"]="4194304 8388608 16777216"
             extra_settings["net.ipv4.tcp_mem"]="1048576 4194304 16777216"
             
@@ -1013,8 +1029,16 @@ generate_sysctl_conf() {
             extra_settings["net.core.rmem_default"]=4194304
             extra_settings["net.core.wmem_default"]=4194304
             extra_settings["net.core.optmem_max"]=8388608
-            extra_settings["net.ipv4.tcp_rmem"]=$(( NIC >= 10000 ? "4096 262144 67108864" : "4096 131072 33554432" ))
-            extra_settings["net.ipv4.tcp_wmem"]=$(( NIC >= 10000 ? "4096 262144 67108864" : "4096 131072 33554432" ))
+            
+            # Fix TCP rmem and wmem settings using if/then/else
+            if [ "$NIC" -ge 10000 ]; then
+                extra_settings["net.ipv4.tcp_rmem"]="4096 262144 67108864"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 262144 67108864"
+            else
+                extra_settings["net.ipv4.tcp_rmem"]="4096 131072 33554432"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 131072 33554432"
+            fi
+            
             extra_settings["net.ipv4.udp_mem"]="8388608 16777216 33554432"
             extra_settings["net.ipv4.tcp_mem"]="4194304 8388608 33554432"
             
@@ -1110,8 +1134,16 @@ generate_sysctl_conf() {
             extra_settings["net.core.rmem_default"]=2097152
             extra_settings["net.core.wmem_default"]=2097152
             extra_settings["net.core.optmem_max"]=4194304
-            extra_settings["net.ipv4.tcp_rmem"]=$(( NIC >= 10000 ? "4096 131072 33554432" : "4096 65536 16777216" ))
-            extra_settings["net.ipv4.tcp_wmem"]=$(( NIC >= 10000 ? "4096 131072 33554432" : "4096 65536 16777216" ))
+            
+            # Fix TCP rmem and wmem settings using if/then/else
+            if [ "$NIC" -ge 10000 ]; then
+                extra_settings["net.ipv4.tcp_rmem"]="4096 131072 33554432"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 131072 33554432"
+            else
+                extra_settings["net.ipv4.tcp_rmem"]="4096 65536 16777216"
+                extra_settings["net.ipv4.tcp_wmem"]="4096 65536 16777216"
+            fi
+            
             extra_settings["net.ipv4.udp_mem"]="4194304 8388608 16777216"
             extra_settings["net.ipv4.tcp_mem"]="786432 1048576 16777216"
             
